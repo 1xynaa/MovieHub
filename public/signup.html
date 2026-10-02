@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create account | MovieHub</title><link rel="stylesheet" href="/style.css">
+    <script defer src="/js/movieApi.js"></script><script defer src="/js/main.js"></script><script defer src="/js/auth.js"></script>
+</head>
+<body class="auth-page">
+    <header class="top-navbar"><div class="top-nav-inner"><a class="logo" href="/"><span class="logo-mark">M</span>MovieHub</a><div class="nav-right"><a href="/">Home</a><a class="nav-signup" href="/login.html">Sign in</a></div></div></header>
+    <main class="auth-main"><section class="auth-box">
+        <div class="auth-icon" aria-hidden="true">✦</div><p class="eyebrow">JOIN MOVIEHUB</p><h1>Your next movie night awaits.</h1><p class="auth-subtitle">Create an account to save movies and keep your bookings together.</p>
+        <form class="auth-form" id="signupForm">
+            <div class="form-field"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Enter your name" required></div>
+            <div class="form-field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+            <div class="form-field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="new-password" minlength="6" placeholder="At least 6 characters" required></div>
+            <button class="button button-primary" type="submit">Create account</button>
+        </form>
+        <p class="auth-status" id="authStatus" role="alert"></p><p class="auth-footer-text">Already a member? <a href="/login.html">Sign in</a></p>
+    </section></main>
+</body>
+</html>

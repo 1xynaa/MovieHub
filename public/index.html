@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Discover movies, book cinema tickets and find live events with MovieHub.">
+    <title>MovieHub | Movies, Events & Cinema Tickets</title>
+    <link rel="stylesheet" href="/style.css">
+    <script defer src="/js/movieApi.js"></script>
+    <script defer src="/js/main.js"></script>
+    <script defer src="/js/home.js"></script>
+</head>
+<body>
+    <header class="top-navbar">
+        <div class="top-nav-inner">
+            <a class="logo" href="/"><span class="logo-mark">M</span>MovieHub</a>
+            <form class="main-search" data-search-form role="search"><span aria-hidden="true">⌕</span><input aria-label="Search movies and events" placeholder="Search for Movies, Events, Sports and more"><button class="hidden" type="submit">Search</button></form>
+            <div class="nav-right">
+                <button class="location-button" type="button">⌖ Chennai</button>
+                <a data-auth="login" href="/login.html">Sign in</a>
+                <a data-auth="signup" class="nav-signup" href="/signup.html">Sign up</a>
+                <a data-auth="profile" class="hidden" href="/dashboard.html">Profile</a>
+                <a data-auth="dashboard" class="hidden" href="/dashboard.html">Dashboard</a>
+                <a data-auth="logout" class="hidden" href="/logout">Logout</a>
+            </div>
+        </div>
+        <nav class="category-navbar" aria-label="Main categories"><div class="category-inner">
+            <a href="/movies.html">Movies</a><a href="/movies.html">Stream</a><a href="/events.html">Events</a><a href="/events.html?type=Theatre">Plays</a><a href="/events.html?type=Sports">Sports</a><a href="/events.html?type=Activities">Activities</a><span class="category-spacer"></span><a href="/events.html#list-show">List your show</a>
+        </div></nav>
+    </header>
+    <main>
+        <section class="home-banner"><div class="hero-inner"><div class="hero-copy">
+            <p class="eyebrow">YOUR CITY. YOUR NEXT BIG NIGHT.</p>
+            <h1>Find your next <span>favourite movie.</span></h1>
+            <p>Discover what’s playing, pick your seats, and make a night of it.</p>
+            <a class="button button-primary" href="/movies.html">Explore movies <span aria-hidden="true">→</span></a>
+        </div></div></section>
+
+        <section class="content-section page-width">
+            <div class="section-heading"><div><p class="eyebrow">HANDPICKED FOR YOU</p><h2>Recommended movies</h2><p>Big stories, best enjoyed on the big screen.</p></div><a class="text-link" href="/movies.html">See all →</a></div>
+            <div id="recommendedMovies" class="section-row" aria-label="Recommended movies"></div>
+        </section>
+
+        <section class="content-section soft-section"><div class="page-width">
+            <div class="section-heading"><div><p class="eyebrow">NOW PLAYING</p><h2>Movies to book right now</h2><p>Choose your film and we’ll save you a seat.</p></div><a class="text-link" href="/movies.html">Browse all →</a></div>
+            <div id="nowShowingMovies" class="movie-grid"></div>
+        </div></section>
+
+        <section class="content-section page-width">
+            <div class="section-heading"><div><p class="eyebrow">PLAN AHEAD</p><h2>Upcoming movies</h2><p>Keep a few more stories on your radar.</p></div></div>
+            <div id="upcomingMovies" class="upcoming-grid"></div>
+        </section>
+
+        <section class="content-section soft-section"><div class="page-width">
+            <div class="section-heading"><div><p class="eyebrow">OFF THE SCREEN</p><h2>Make a night of it</h2><p>Find live experiences happening around Chennai.</p></div><a class="text-link" href="/events.html">All events →</a></div>
+            <div class="event-teaser-grid">
+                <a class="event-teaser" href="/events.html?type=Concerts"><img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=700&q=85" alt="Live concert audience"><div><h3>Music concerts</h3><p>Find your live soundtrack</p></div></a>
+                <a class="event-teaser" href="/events.html?type=Comedy"><img src="https://images.unsplash.com/photo-1585699324551-f6c309eedeca?auto=format&fit=crop&w=700&q=85" alt="Comedy show stage"><div><h3>Comedy shows</h3><p>A good laugh is always in</p></div></a>
+                <a class="event-teaser" href="/events.html?type=Sports"><img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=700&q=85" alt="Football match"><div><h3>Sports events</h3><p>Feel every moment live</p></div></a>
+                <a class="event-teaser" href="/events.html?type=Theatre"><img src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=700&q=85" alt="Theatre stage"><div><h3>Theatre</h3><p>Stories that come alive</p></div></a>
+            </div>
+        </div></section>
+
+        <section class="content-section page-width">
+            <div class="section-heading"><div><p class="eyebrow">FIND YOUR KIND OF STORY</p><h2>Browse by genre</h2></div></div>
+            <div class="browse-chips">
+                <a class="browse-chip" href="/movies.html?genre=Action">Action</a><a class="browse-chip" href="/movies.html?genre=Comedy">Comedy</a><a class="browse-chip" href="/movies.html?genre=Drama">Drama</a><a class="browse-chip" href="/movies.html?genre=Thriller">Thriller</a><a class="browse-chip" href="/movies.html?genre=Horror">Horror</a><a class="browse-chip" href="/movies.html?genre=Romance">Romance</a><a class="browse-chip" href="/movies.html?genre=Fantasy">Fantasy</a><a class="browse-chip" href="/movies.html?genre=Sci-Fi">Sci-Fi</a><a class="browse-chip" href="/movies.html?genre=Animation">Animation</a>
+            </div>
+        </section>
+        <section class="content-section soft-section"><div class="page-width">
+            <div class="section-heading"><div><p class="eyebrow">WATCH IT YOUR WAY</p><h2>Browse by language</h2></div></div>
+            <div class="browse-chips">
+                <a class="browse-chip" href="/movies.html?language=English">English</a><a class="browse-chip" href="/movies.html?language=Hindi">Hindi</a><a class="browse-chip" href="/movies.html?language=Tamil">Tamil</a><a class="browse-chip" href="/movies.html?language=Telugu">Telugu</a><a class="browse-chip" href="/movies.html?language=Malayalam">Malayalam</a><a class="browse-chip" href="/movies.html?language=Kannada">Kannada</a><a class="browse-chip" href="/movies.html?language=Korean">Korean</a><a class="browse-chip" href="/movies.html?language=Japanese">Japanese</a>
+            </div>
+        </div></section>
+        <section class="content-section page-width">
+            <div class="section-heading"><div><p class="eyebrow">YOUR NEIGHBOURHOOD SCREENS</p><h2>Popular cinemas</h2><p>Find a familiar seat near you.</p></div></div>
+            <div class="cinema-grid">
+                <div class="cinema-card"><span class="cinema-icon">▣</span><div><h3>PVR Cinemas</h3><p>Premium screens · Chennai</p></div></div>
+                <div class="cinema-card"><span class="cinema-icon">▣</span><div><h3>INOX</h3><p>Big screen experiences · Chennai</p></div></div>
+                <div class="cinema-card"><span class="cinema-icon">▣</span><div><h3>AGS Cinemas</h3><p>Local favourites · Chennai</p></div></div>
+                <div class="cinema-card"><span class="cinema-icon">▣</span><div><h3>SPI Cinemas</h3><p>Discover a new favourite · Chennai</p></div></div>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer"><div class="page-width footer-inner"><div><a class="logo" href="/"><span class="logo-mark">M</span>MovieHub</a><p>Discover. Book. Enjoy the show.</p></div><div class="footer-links"><a href="/movies.html">Movies</a><a href="/events.html">Events</a><a href="/dashboard.html">My bookings</a></div></div></footer>
+</body>
+</html>

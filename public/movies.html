@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movies | MovieHub</title><link rel="stylesheet" href="/style.css">
+    <script defer src="/js/movieApi.js"></script><script defer src="/js/main.js"></script><script defer src="/js/movies.js"></script>
+</head>
+<body>
+    <header class="top-navbar"><div class="top-nav-inner">
+        <a class="logo" href="/"><span class="logo-mark">M</span>MovieHub</a>
+        <form class="main-search" data-search-form role="search"><span aria-hidden="true">⌕</span><input id="movieSearch" aria-label="Search movies" placeholder="Search for Movies, Events, Sports and more"><button class="hidden" type="submit">Search</button></form>
+        <div class="nav-right"><button class="location-button" type="button">⌖ Chennai</button><a data-auth="login" href="/login.html">Sign in</a><a data-auth="signup" class="nav-signup" href="/signup.html">Sign up</a><a data-auth="profile" class="hidden" href="/dashboard.html">Profile</a><a data-auth="dashboard" class="hidden" href="/dashboard.html">Dashboard</a><a data-auth="logout" class="hidden" href="/logout">Logout</a></div>
+    </div><nav class="category-navbar" aria-label="Main categories"><div class="category-inner"><a href="/movies.html">Movies</a><a href="/movies.html">Stream</a><a href="/events.html">Events</a><a href="/events.html?type=Theatre">Plays</a><a href="/events.html?type=Sports">Sports</a><a href="/events.html?type=Activities">Activities</a></div></nav></header>
+    <main class="page-width">
+        <section class="listing-intro"><p class="eyebrow">THE MOVIE GUIDE</p><h1>Movies in Chennai</h1><p>Find your next favourite, then book your seats.</p></section>
+        <section class="filter-panel" aria-label="Movie filters">
+            <h2>Genres</h2><div class="browse-chips">
+                <a class="browse-chip" href="/movies.html">All</a><a class="browse-chip" href="/movies.html?genre=Action">Action</a><a class="browse-chip" href="/movies.html?genre=Comedy">Comedy</a><a class="browse-chip" href="/movies.html?genre=Drama">Drama</a><a class="browse-chip" href="/movies.html?genre=Thriller">Thriller</a><a class="browse-chip" href="/movies.html?genre=Romance">Romance</a><a class="browse-chip" href="/movies.html?genre=Fantasy">Fantasy</a><a class="browse-chip" href="/movies.html?genre=Sci-Fi">Sci-Fi</a><a class="browse-chip" href="/movies.html?genre=Animation">Animation</a>
+            </div>
+            <h2>Languages</h2><div class="browse-chips">
+                <a class="browse-chip" href="/movies.html?language=English">English</a><a class="browse-chip" href="/movies.html?language=Hindi">Hindi</a><a class="browse-chip" href="/movies.html?language=Tamil">Tamil</a><a class="browse-chip" href="/movies.html?language=Telugu">Telugu</a><a class="browse-chip" href="/movies.html?language=Malayalam">Malayalam</a><a class="browse-chip" href="/movies.html?language=Kannada">Kannada</a><a class="browse-chip" href="/movies.html?language=Korean">Korean</a><a class="browse-chip" href="/movies.html?language=Japanese">Japanese</a>
+            </div>
+        </section>
+        <section class="listing-movies"><p class="listing-status" id="movieStatus" role="status">Loading movies…</p><div class="movie-grid" id="movieGrid"></div></section>
+    </main>
+    <footer class="site-footer"><div class="page-width footer-inner"><div><a class="logo" href="/"><span class="logo-mark">M</span>MovieHub</a><p>Discover. Book. Enjoy the show.</p></div><div class="footer-links"><a href="/events.html">Events</a><a href="/dashboard.html">My bookings</a></div></div></footer>
+</body>
+</html>

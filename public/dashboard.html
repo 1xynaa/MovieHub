@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your MovieHub | Dashboard</title><link rel="stylesheet" href="/style.css">
+    <script defer src="/js/movieApi.js"></script><script defer src="/js/main.js"></script><script defer src="/js/dashboard.js"></script>
+</head>
+<body>
+    <header class="top-navbar"><div class="top-nav-inner">
+        <a class="logo" href="/"><span class="logo-mark">M</span>MovieHub</a><form class="main-search" data-search-form role="search"><span aria-hidden="true">⌕</span><input aria-label="Search movies" placeholder="Search for Movies, Events, Sports and more"><button class="hidden" type="submit">Search</button></form>
+        <div class="nav-right"><button class="location-button" type="button">⌖ Chennai</button><a data-auth="login" href="/login.html">Sign in</a><a data-auth="signup" class="nav-signup" href="/signup.html">Sign up</a><a data-auth="profile" class="hidden" href="/dashboard.html">Profile</a><a data-auth="dashboard" class="hidden" href="/dashboard.html">Dashboard</a><a data-auth="logout" class="hidden" href="/logout">Logout</a></div>
+    </div><nav class="category-navbar" aria-label="Main categories"><div class="category-inner"><a href="/movies.html">Movies</a><a href="/movies.html">Stream</a><a href="/events.html">Events</a><a href="/events.html?type=Theatre">Plays</a><a href="/events.html?type=Sports">Sports</a><a href="/events.html?type=Activities">Activities</a></div></nav></header>
+    <main class="page-width">
+        <section class="dashboard-welcome"><p class="eyebrow">YOUR MOVIEHUB</p><h1>Welcome back, <span data-user-name>movie fan</span>.</h1><p>Your saved movies and upcoming cinema plans, all in one place.</p></section>
+        <section class="dashboard-section"><h2>My bookings</h2><div id="myBookings" class="booking-list"><div class="empty-state">Loading your bookings…</div></div></section>
+        <section class="dashboard-section"><h2>My saved movies & favourites</h2><div id="savedMovies" class="saved-list"><div class="empty-state">Loading your saved movies…</div></div></section>
+        <section class="dashboard-section" id="profile"><h2>Profile</h2><div class="saved-card"><span class="cinema-icon" aria-hidden="true">☺</span><div><h3 data-user-name>MovieHub member</h3><p data-user-email>Account details</p></div></div></section>
+        <section class="dashboard-section"><div class="empty-state"><h2>Looking for a new favourite?</h2><p>Explore what’s on and save a movie for later.</p><a href="/movies.html">Browse movies</a></div></section>
+    </main>
+    <footer class="site-footer"><div class="page-width footer-inner"><div><a class="logo" href="/"><span class="logo-mark">M</span>MovieHub</a><p>Discover. Book. Enjoy the show.</p></div><div class="footer-links"><a href="/movies.html">Movies</a><a href="/events.html">Events</a></div></div></footer>
+</body>
+</html>

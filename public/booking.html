@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book tickets | MovieHub</title><link rel="stylesheet" href="/style.css">
+    <script defer src="/js/movieApi.js"></script><script defer src="/js/main.js"></script><script defer src="/js/booking.js"></script>
+</head>
+<body>
+    <header class="top-navbar"><div class="top-nav-inner">
+        <a class="logo" href="/"><span class="logo-mark">M</span>MovieHub</a><form class="main-search" data-search-form role="search"><span aria-hidden="true">⌕</span><input aria-label="Search movies" placeholder="Search for Movies, Events, Sports and more"><button class="hidden" type="submit">Search</button></form>
+        <div class="nav-right"><button class="location-button" type="button">⌖ Chennai</button><a data-auth="login" href="/login.html">Sign in</a><a data-auth="signup" class="nav-signup" href="/signup.html">Sign up</a><a data-auth="profile" class="hidden" href="/dashboard.html">Profile</a><a data-auth="dashboard" class="hidden" href="/dashboard.html">Dashboard</a><a data-auth="logout" class="hidden" href="/logout">Logout</a></div>
+    </div><nav class="category-navbar" aria-label="Main categories"><div class="category-inner"><a href="/movies.html">Movies</a><a href="/movies.html">Stream</a><a href="/events.html">Events</a><a href="/events.html?type=Theatre">Plays</a><a href="/events.html?type=Sports">Sports</a><a href="/events.html?type=Activities">Activities</a></div></nav></header>
+    <main class="page-width">
+        <section class="listing-intro"><p class="eyebrow">A GREAT NIGHT OUT STARTS HERE</p><h1>Book your tickets</h1><p>Pick your cinema, show time and seats.</p></section>
+        <form id="bookingForm" class="booking-layout">
+            <div class="booking-main">
+                <h1>Choose your show</h1>
+                <section class="booking-step"><h2>1. Cinema & date</h2><div class="booking-fields">
+                    <label for="cinema">Cinema<select id="cinema" required><option value="">Choose a cinema</option><option>PVR Phoenix Marketcity</option><option>INOX Chennai Citi Centre</option><option>AGS Cinemas T. Nagar</option><option>SPI Palazzo</option></select></label>
+                    <label for="showDate">Date<input id="showDate" type="date" required></label>
+                </div></section>
+                <section class="booking-step"><h2>2. Show time</h2><div class="show-times">
+                    <button class="show-time" type="button" data-show-time="10:30 AM">10:30 AM</button><button class="show-time" type="button" data-show-time="1:45 PM">1:45 PM</button><button class="show-time" type="button" data-show-time="6:15 PM">6:15 PM</button><button class="show-time" type="button" data-show-time="9:30 PM">9:30 PM</button>
+                </div></section>
+                <section class="booking-step"><h2>3. Pick your seats</h2><div class="screen">SCREEN THIS WAY</div><div class="seat-grid" id="seatGrid"></div>
+                    <div class="seat-legend"><span class="legend-item"><i class="legend-dot"></i>Available</span><span class="legend-item"><i class="legend-dot selected"></i>Selected</span><span class="legend-item"><i class="legend-dot booked"></i>Booked</span></div>
+                </section>
+            </div>
+            <aside class="booking-summary">
+                <div class="summary-movie"><img id="bookingPoster" src="" alt=""><div><p class="eyebrow">YOUR MOVIE</p><h2 id="bookingMovieName">Loading…</h2></div></div>
+                <p class="summary-line"><span>Ticket price</span><span>₹250 / seat</span></p>
+                <p class="summary-line"><span id="seatCount">0 seats selected</span><span id="bookingSubtotal">₹0</span></p>
+                <div class="summary-total"><span>Total</span><span id="bookingAmount">₹0</span></div>
+                <button class="button button-primary" type="submit">Confirm booking</button>
+            </aside>
+        </form>
+    </main>
+    <footer class="site-footer"><div class="page-width footer-inner"><div><a class="logo" href="/"><span class="logo-mark">M</span>MovieHub</a><p>Discover. Book. Enjoy the show.</p></div><div class="footer-links"><a href="/movies.html">Movies</a><a href="/dashboard.html">My bookings</a></div></div></footer>
+</body>
+</html>
