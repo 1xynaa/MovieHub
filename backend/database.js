@@ -1,73 +1,215 @@
 const path = require("path");
-const sqlite3 = require("@appthreat/sqlite3").verbose();
+const { DatabaseSync } = require("node:sqlite");
 
-const databasePath = process.env.DATABASE_PATH || path.join(__dirname, "..", "database.db");
-const db = new sqlite3.Database(databasePath);
 
-function run(sql) {
-    return new Promise((resolve, reject) => {
-        db.run(sql, (error) => error ? reject(error) : resolve());
-    });
-}
+// Use /tmp on Vercel because the deployed app cannot use
+// the project folder as a normal writable database location.
+const databasePath =
+    process.env.DATABASE_PATH ||
+    (process.env.VERCEL
+        ? "/tmp/moviehub.db"
+        : path.join(__dirname, "..", "database.db"));
 
-function getColumnNames(table) {
-    return new Promise((resolve, reject) => {
-        db.all(`PRAGMA table_info(${table})`, (error, columns) => {
-            if (error) return reject(error);
-            resolve(columns.map((column) => column.name));
-        });
-    });
-}
 
-async function initializeDatabase() {
-    await run(`
+const sqlite = new DatabaseSync(databasePath);
+
+
+// Small wrapper so the rest of the project can keep using
+// the same db.run(), db.get() and db.all() style.
+const db = {};
+
+
+// =========================
+// RUN
+// =========================
+
+db.run = function(sql, params, callback) {
+
+    if (typeof params === "function") {
+        callback = params;
+        params = [];
+    }
+
+    params = params || [];
+
+    try {
+
+        const statement =
+            sqlite.prepare(sql);
+
+        const result =
+            statement.run(...params);
+
+        statement.close();
+
+
+        if (callback) {
+
+            callback.call(
+                {
+                    changes: Number(result.changes || 0),
+                    lastID: Number(result.lastInsertRowid || 0)
+                },
+                null
+            );
+
+        }
+
+    } catch (error) {
+
+        if (callback) {
+            callback.call({}, error);
+        }
+
+    }
+
+};
+
+
+// =========================
+// GET
+// =========================
+
+db.get = function(sql, params, callback) {
+
+    if (typeof params === "function") {
+        callback = params;
+        params = [];
+    }
+
+    params = params || [];
+
+
+    try {
+
+        const statement =
+            sqlite.prepare(sql);
+
+        const row =
+            statement.get(...params);
+
+        statement.close();
+
+
+        callback(null, row);
+
+    } catch (error) {
+
+        callback(error);
+
+    }
+
+};
+
+
+// =========================
+// ALL
+// =========================
+
+db.all = function(sql, params, callback) {
+
+    if (typeof params === "function") {
+        callback = params;
+        params = [];
+    }
+
+    params = params || [];
+
+
+    try {
+
+        const statement =
+            sqlite.prepare(sql);
+
+        const rows =
+            statement.all(...params);
+
+        statement.close();
+
+
+        callback(null, rows);
+
+    } catch (error) {
+
+        callback(error);
+
+    }
+
+};
+
+
+// =========================
+// DATABASE SETUP
+// =========================
+
+function setupDatabase() {
+
+    sqlite.exec(`
+
         CREATE TABLE IF NOT EXISTS users (
+
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+
             name TEXT NOT NULL,
+
             email TEXT UNIQUE NOT NULL,
+
             password TEXT NOT NULL
-        )
+
+        );
+
     `);
-    await run(`
+
+
+    sqlite.exec(`
+
         CREATE TABLE IF NOT EXISTS saved_movies (
+
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+
             user_id INTEGER NOT NULL,
+
             movie_name TEXT NOT NULL,
+
             poster TEXT NOT NULL DEFAULT '',
+
             movie_id TEXT
-        )
+
+        );
+
     `);
-    await run(`
+
+
+    sqlite.exec(`
+
         CREATE TABLE IF NOT EXISTS bookings (
+
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+
             user_id INTEGER NOT NULL,
+
             movie_name TEXT NOT NULL,
+
             cinema TEXT NOT NULL,
+
             date TEXT NOT NULL,
+
             time TEXT NOT NULL,
+
             seat TEXT NOT NULL,
+
             movie_id TEXT,
+
             poster TEXT NOT NULL DEFAULT ''
-        )
+
+        );
+
     `);
 
-    const savedMovieColumns = await getColumnNames("saved_movies");
-    if (!savedMovieColumns.includes("poster")) {
-        await run("ALTER TABLE saved_movies ADD COLUMN poster TEXT NOT NULL DEFAULT ''");
-    }
-    if (!savedMovieColumns.includes("movie_id")) {
-        await run("ALTER TABLE saved_movies ADD COLUMN movie_id TEXT");
-    }
-
-    const bookingColumns = await getColumnNames("bookings");
-    if (!bookingColumns.includes("movie_id")) {
-        await run("ALTER TABLE bookings ADD COLUMN movie_id TEXT");
-    }
-    if (!bookingColumns.includes("poster")) {
-        await run("ALTER TABLE bookings ADD COLUMN poster TEXT NOT NULL DEFAULT ''");
-    }
 }
 
-db.ready = initializeDatabase();
+
+setupDatabase();
+
 
 module.exports = db;
