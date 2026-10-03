@@ -356,3 +356,8 @@ db.ready
         console.error("Could not initialize the database:", error.message);
         process.exitCode = 1;
     });
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`MovieHub running on port ${PORT}`);
+});
