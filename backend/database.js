@@ -2,8 +2,10 @@ const path = require("path");
 const { DatabaseSync } = require("node:sqlite");
 
 
-// Use /tmp on Vercel because the deployed app cannot use
-// the project folder as a normal writable database location.
+// =========================
+// DATABASE LOCATION
+// =========================
+
 const databasePath =
     process.env.DATABASE_PATH ||
     (process.env.VERCEL
@@ -14,16 +16,18 @@ const databasePath =
 const sqlite = new DatabaseSync(databasePath);
 
 
-// Small wrapper so the rest of the project can keep using
-// the same db.run(), db.get() and db.all() style.
+// =========================
+// DATABASE OBJECT
+// =========================
+
 const db = {};
 
 
 // =========================
-// RUN
+// RUN SQL
 // =========================
 
-db.run = function(sql, params, callback) {
+db.run = function (sql, params, callback) {
 
     if (typeof params === "function") {
         callback = params;
@@ -34,14 +38,9 @@ db.run = function(sql, params, callback) {
 
     try {
 
-        const statement =
-            sqlite.prepare(sql);
+        const statement = sqlite.prepare(sql);
 
-        const result =
-            statement.run(...params);
-
-        statement.close();
-
+        const result = statement.run(...params);
 
         if (callback) {
 
@@ -67,10 +66,10 @@ db.run = function(sql, params, callback) {
 
 
 // =========================
-// GET
+// GET ONE ROW
 // =========================
 
-db.get = function(sql, params, callback) {
+db.get = function (sql, params, callback) {
 
     if (typeof params === "function") {
         callback = params;
@@ -79,17 +78,11 @@ db.get = function(sql, params, callback) {
 
     params = params || [];
 
-
     try {
 
-        const statement =
-            sqlite.prepare(sql);
+        const statement = sqlite.prepare(sql);
 
-        const row =
-            statement.get(...params);
-
-        statement.close();
-
+        const row = statement.get(...params);
 
         callback(null, row);
 
@@ -103,10 +96,10 @@ db.get = function(sql, params, callback) {
 
 
 // =========================
-// ALL
+// GET ALL ROWS
 // =========================
 
-db.all = function(sql, params, callback) {
+db.all = function (sql, params, callback) {
 
     if (typeof params === "function") {
         callback = params;
@@ -115,17 +108,11 @@ db.all = function(sql, params, callback) {
 
     params = params || [];
 
-
     try {
 
-        const statement =
-            sqlite.prepare(sql);
+        const statement = sqlite.prepare(sql);
 
-        const rows =
-            statement.all(...params);
-
-        statement.close();
-
+        const rows = statement.all(...params);
 
         callback(null, rows);
 
@@ -139,10 +126,12 @@ db.all = function(sql, params, callback) {
 
 
 // =========================
-// DATABASE SETUP
+// CREATE TABLES
 // =========================
 
 function setupDatabase() {
+
+    // USERS
 
     sqlite.exec(`
 
@@ -160,6 +149,8 @@ function setupDatabase() {
 
     `);
 
+
+    // SAVED MOVIES
 
     sqlite.exec(`
 
@@ -179,6 +170,8 @@ function setupDatabase() {
 
     `);
 
+
+    // BOOKINGS
 
     sqlite.exec(`
 
@@ -208,6 +201,10 @@ function setupDatabase() {
 
 }
 
+
+// =========================
+// START DATABASE
+// =========================
 
 setupDatabase();
 
