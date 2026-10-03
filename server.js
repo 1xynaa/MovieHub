@@ -346,18 +346,8 @@ app.get("/logout", (req, res) => {
     });
 });
 
-db.ready
-    .then(() => {
-        app.listen(port, () => {
-            console.log(`MovieHub is running at http://localhost:${port}`);
-        });
-    })
-    .catch((error) => {
-        console.error("Could not initialize the database:", error.message);
-        process.exitCode = 1;
-    });
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, () => {
     console.log(`MovieHub running on port ${PORT}`);
 });
